@@ -1,0 +1,12 @@
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; padding: 20px; }
+h1 { color: #2d7be5; }
+.task { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; border: 1px solid #e3e3e3; padding: 18px; margin-bottom: 18px; }
+label { display: block; margin-top: 10px; font-weight: 500; color: #333; }
+input, select, textarea { width: 100%; padding: 7px; border-radius: 4px; border: 1px solid #ccc; margin-top: 4px; font-size: 15px; }
+button { margin-top: 12px; padding: 7px 16px; border-radius: 4px; border: none; background: #2d7be5; color: #fff; font-size: 15px; cursor: pointer; }
+button:hover { background: #185bb5; }
+.next-task { background: #f2f6fc; border-radius: 6px; padding: 10px; margin-top: 8px; display: flex; gap: 10px; align-items: center; }
+.next-task select { width: auto; min-width: 120px; }
+.next-task-label { font-weight: 400; color: #555; margin-right: 8px; }
+.task-id-input { font-weight: 600; color: #2d7be5; }
+.task-type-select { width: auto; min-width: 120px; }
