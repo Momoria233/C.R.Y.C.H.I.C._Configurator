@@ -15,7 +15,12 @@ function addTask() {
     frames: [],
     ip: "",
     port: 0,
-    extra: {}
+    extra: {},
+    url:"",
+    method:"",
+    data: {},
+    headers: {},
+    cookies: {},
   };
   tasks.push(task);
   renderTasks();
@@ -105,6 +110,7 @@ function renderTask(index) {
         <option value="timeout" ${task.type === "timeout" ? "selected" : ""}>timeout</option>
         <option value="detect" ${task.type === "detect" ? "selected" : ""}>detect</option>
         <option value="socketsend" ${task.type === "socketsend" ? "selected" : ""}>socketsend</option>
+        <option value="http" ${task.type === "http" ? "selected" : ""}>http</option>
       </select>
     </label>
     <label>任务 ID:
@@ -218,6 +224,33 @@ function renderTaskFields(task, index) {
         </label>
       `;
       break;
+
+    case "http":
+      taskFields = `
+        <label>请求 URL:
+          <input type="text" oninput="updateTask(${index}, 'url', this)" value="${task.url}" />
+        </label>
+        <label>请求方法:
+          <select oninput="updateTask(${index}, 'method', this)">
+            <option value="">请选择方法</option>
+            <option value="HEAD" ${task.method === "HEAD" ? "selected" : ""}>HEAD</option>
+            <option value="GET" ${task.method === "GET" ? "selected" : ""}>GET</option>
+            <option value="POST" ${task.method === "POST" ? "selected" : ""}>POST</option>
+            <option value="PUT" ${task.method === "PUT" ? "selected" : ""}>PUT</option>
+            <option value="PATCH" ${task.method === "PATCH" ? "selected" : ""}>PATCH</option>
+            <option value="DELETE" ${task.method === "DELETE" ? "selected" : ""}>DELETE</option>
+          </select>
+        </label>
+        <label>请求数据（JSON）:
+          <textarea oninput="updateTask(${index}, 'data', this)">${JSON.stringify(task.data, null, 2)}</textarea>
+        </label>
+        <label>请求头（JSON）:
+          <textarea oninput="updateTask(${index}, 'headers', this)">${JSON.stringify(task.headers, null, 2)}</textarea>
+        </label>
+        <label>Cookies（JSON）:
+          <textarea oninput="updateTask(${index}, 'cookies', this)">${JSON.stringify(task.cookies, null, 2)}</textarea>
+        </label>
+      `;
   }
   return taskFields;
 }
@@ -229,7 +262,8 @@ function exportConfig() {
     match: ["type", "id", "start", "nextTasks", "bodyPart", "poseFile", "sensetive", "frames", "extra"],
     timeout: ["type", "id", "start", "nextTasks", "timeout", "extra"],
     detect: ["type", "id", "start", "nextTasks", "bodyPart", "frames", "extra"],
-    socketsend: ["type", "id", "start", "nextTasks", "ip", "port", "extra"]
+    socketsend: ["type", "id", "start", "nextTasks", "ip", "port", "extra"],
+    http: ["type", "id", "start", "nextTasks", "url", "method", "data", "headers", "cookies"]
   };
 
   const filteredTasks = tasks.map(task => {
