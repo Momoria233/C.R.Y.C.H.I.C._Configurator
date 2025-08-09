@@ -15,15 +15,23 @@
   <!-- 主内容区域 -->
   <div id="main-content" style="opacity: 0; visibility: hidden;">
     <h1>C.R.Y.C.H.I.C. config.json 生成器</h1>
-    <p title="Camera-driven Recognition Yielding Contextual Hand-gesture Intelligent Control简称C.R.Y.C.H.I.C.，中文名为基于相机驱动的手势识别与情境智能控制">
-        这是一个C.R.Y.C.H.I.C.项目的配置文件生成器。您可以使用这个网页图形化生成符合C.R.Y.C.H.I.C.要求的config.json文件。<div/>C.R.Y.C.H.I.C.<div/>It's <font color="#3388BB"><strong>MyConfig!!!!</strong></font></p>
+    <button id="toggle-bg-btn" style="margin-bottom: 16px;">开启背景动画</button>
+    <div id="desc-text">
+      <p title="Camera-driven Recognition Yielding Contextual Hand-gesture Intelligent Control简称C.R.Y.C.H.I.C.，中文名为基于相机驱动的手势识别与情境智能控制">
+        这是一个C.R.Y.C.H.I.C.项目的配置文件生成器。您可以使用这个网页图形化生成符合C.R.Y.C.H.I.C.要求的config.json文件。
+        <div/>
+        <a href="https://github.com/interfacew/C.R.Y.C.H.I.C.">C.R.Y.C.H.I.C.</a>
+        <div/>It's <font color="#3388BB"><strong>MyConfig!!!!</strong></font>
+      </p>
+    </div>
     <div id="task-container"></div>
     <button onclick="addTask()">➕ 添加任务</button>
     <button onclick="exportConfig()">💾 导出 config.json</button>
+    <br><br>
+    <button onclick="window.open('https://github.com/interfacew/C.R.Y.C.H.I.C.', '_blank')" style="background:#222;color:#fff;">前往仓库</button>
   </div>
   <script src="main.js"></script>
   <script>
-    // splash动画结束后隐藏splash，显示主内容
     document.getElementById('splash-video').addEventListener('ended', function() {
       document.getElementById('splash').style.opacity = 0;
       setTimeout(function() {
@@ -31,7 +39,6 @@
         document.getElementById('main-content').style.display = '';
       }, 800);
     });
-    // 如果视频很短或自动播放失败，7秒后自动进入主页面
     setTimeout(function() {
       if (document.getElementById('main-content').style.opacity === '0') {
         document.getElementById('splash').style.opacity = 0;
@@ -41,7 +48,39 @@
           document.getElementById('main-content').style.visibility = 'visible';
         }, 800);
       }
-}, 5000);
+    }, 5000);
+    const toggleBtn = document.getElementById('toggle-bg-btn');
+    let bgVideo = null;
+    let bgOn = false;
+    toggleBtn.addEventListener('click', function() {
+      if (!bgOn) {
+        bgVideo = document.createElement('video');
+        bgVideo.id = 'bg-video';
+        bgVideo.src = './assets/background.mp4';
+        bgVideo.autoplay = true;
+        bgVideo.loop = true;
+        bgVideo.muted = true;
+        bgVideo.style.position = 'fixed';
+        bgVideo.style.top = '0';
+        bgVideo.style.left = '0';
+        bgVideo.style.width = '100vw';
+        bgVideo.style.height = '100vh';
+        bgVideo.style.objectFit = 'cover';
+        bgVideo.style.zIndex = '-1';
+        document.body.appendChild(bgVideo);
+        toggleBtn.textContent = '关闭背景动画';
+        document.body.classList.add('bg-on');
+        bgOn = true;
+      } else {
+        if (bgVideo) {
+          bgVideo.pause();
+          document.body.removeChild(bgVideo);
+        }
+        toggleBtn.textContent = '开启背景动画';
+        document.body.classList.remove('bg-on');
+        bgOn = false;
+      }
+    });
   </script>
 </body>
 </html>

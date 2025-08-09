@@ -282,5 +282,4 @@ function exportConfig() {
   URL.revokeObjectURL(url);
 }
 
-// 初始化第一个任务
 addTask();

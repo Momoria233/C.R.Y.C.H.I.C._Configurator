@@ -1,7 +1,7 @@
 body { font-family: 'Segoe UI', Arial, sans-serif; background: #cae2ed; padding: 20px;color: #000000; }
 h1 { color: #3388BB; }
 .task { 
-  background: rgba(255,255,255,0.5); /* 半透明白色 */
+  background: rgba(255,255,255,0.5);
   border-radius: 8px; 
   box-shadow: 0 2px 8px #0001; 
   border: 1px solid #e3e3e3; 
@@ -43,7 +43,7 @@ button:hover { background: #3388BB; }
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: #000;
+  background: #ffffff;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -68,4 +68,27 @@ button:hover { background: #3388BB; }
   font-weight: bold;
   letter-spacing: 0.1em;
   text-shadow: 0 2px 16px #3388BB;
+}
+/* body.bg-on,
+body.bg-on #main-content,
+body.bg-on #main-content * {
+  color: #fff !important;
+  text-shadow: 0 2px 8px #222;
+}
+body.bg-on a {
+  color: #fff !important;
+  text-decoration: none !important;
+} */
+body.bg-on #desc-text {
+  color: #fff !important;
+  opacity: 0.98;
+  text-shadow: none !important;
+}
+body.bg-on #desc-text a {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+a {
+  color: inherit;
+  text-decoration: none;
 }
